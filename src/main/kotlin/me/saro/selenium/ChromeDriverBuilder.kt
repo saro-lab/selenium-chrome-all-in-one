@@ -1,6 +1,7 @@
 package me.saro.selenium
 
 
+import jdk.nashorn.internal.runtime.regexp.joni.Config.log
 import me.saro.selenium.comm.Utils
 import me.saro.selenium.model.DownloadStrategy
 import me.saro.selenium.model.PathManager
@@ -66,8 +67,11 @@ class ChromeDriverBuilder internal constructor(
         }
         val pathManager = PathManager.create(manageChromePath)
         ChromeManager.load(pathManager, downloadStrategy)
-        properties.forEach(System::setProperty)
-        System.setProperty("webdriver.chrome.driver", pathManager.chromedriverBinPath)
+        properties["webdriver.chrome.driver"] = pathManager.chromedriverBinPath
+        log.info("# set system properties")
+        properties.forEach { (k, v) -> log.info("$k: $v"); System.setProperty(k, v) }
+        log.info("# chrome: ${pathManager.chromeBinPath}")
+        options.forEach(log::info)
         created = true
         return ChromeDriverManagerImpl(pathManager.chromeBinPath, options.toSet())
     }

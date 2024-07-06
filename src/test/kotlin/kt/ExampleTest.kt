@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 
-@Disabled
+// @Disabled
 class ExampleTest {
     @Test
     fun test() {

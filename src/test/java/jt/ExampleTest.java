@@ -10,7 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@Disabled
+//@Disabled
 public class ExampleTest {
 
     @Test
