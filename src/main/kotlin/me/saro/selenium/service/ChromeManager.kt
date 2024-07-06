@@ -1,16 +1,17 @@
 package me.saro.selenium.service
 
-import me.saro.selenium.comm.Utils
+import me.saro.kit.FileKit
 import me.saro.selenium.model.ChromeVersionDetails
 import me.saro.selenium.model.DownloadStrategy
 import me.saro.selenium.model.PathManager
 import me.saro.selenium.model.SeleniumChromeException
 import java.io.File
 import java.net.URI
+import java.util.logging.Logger
 
 class ChromeManager {
     companion object {
-        private val log = Utils.getLogger(ChromeManager::class)
+        private val log = Logger.getLogger(ChromeManager::class.qualifiedName)
 
         fun load(pathManager: PathManager, downloadStrategy: DownloadStrategy) {
             log.info("ChromeManager.load(): downloadStrategy: $downloadStrategy")
@@ -45,7 +46,7 @@ class ChromeManager {
                 log.info("download $save start...")
                 URI.create(uri.toString()).toURL().openStream().use { input -> File(root, save).outputStream().use(input::copyTo) }
                 log.info("download $save done and unzip start...")
-                Utils.unzip(File(root, save), 1, File(root))
+                FileKit.unzip(File(root, save), 1, File(root))
                 log.info("download $save done and unzip done")
                 File(root, save).delete()
             } catch (e: Exception) {

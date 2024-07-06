@@ -27,6 +27,9 @@ dependencies {
     // jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
 
+    // saro kit
+    implementation("me.saro:kit:0.2.0")
+
     // test
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

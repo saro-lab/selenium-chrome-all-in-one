@@ -3,7 +3,6 @@ package jt;
 import me.saro.selenium.ChromeDriverManager;
 import me.saro.selenium.model.DownloadStrategy;
 import me.saro.selenium.model.Platform;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

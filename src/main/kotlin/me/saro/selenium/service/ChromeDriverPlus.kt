@@ -1,17 +1,17 @@
 package me.saro.selenium.service
 
-import me.saro.selenium.comm.Utils
 import org.openqa.selenium.By
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.SearchContext
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeDriver
 import java.time.Duration
+import java.util.logging.Logger
 
 class ChromeDriverPlus(
     val driver: ChromeDriver
 ) {
-    private val log = Utils.getLogger(ChromeDriverPlus::class)
+    private val log = Logger.getLogger(ChromeDriverPlus::class.qualifiedName)
 
     fun move(url: String) {
         log.info("connect to $url")

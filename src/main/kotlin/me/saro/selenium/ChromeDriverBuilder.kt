@@ -2,16 +2,17 @@ package me.saro.selenium
 
 
 import jdk.nashorn.internal.runtime.regexp.joni.Config.log
-import me.saro.selenium.comm.Utils
 import me.saro.selenium.model.DownloadStrategy
 import me.saro.selenium.model.PathManager
 import me.saro.selenium.model.SeleniumChromeException
 import me.saro.selenium.service.ChromeDriverPlus
 import me.saro.selenium.service.ChromeManager
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeDriverService
 import org.openqa.selenium.chrome.ChromeOptions
 import java.io.File
 import java.time.Duration
+import java.util.logging.Logger
 
 class ChromeDriverBuilder internal constructor(
     private val manageChromePath: File,
@@ -23,7 +24,7 @@ class ChromeDriverBuilder internal constructor(
     private var downloadStrategy: DownloadStrategy = DownloadStrategy.DOWNLOAD_IF_NO_VERSION
     private val options: MutableSet<String> = mutableSetOf()
     private val properties: MutableMap<String, String> = mutableMapOf()
-    private val log = Utils.getLogger(ChromeDriverBuilder::class)
+    private val log = Logger.getLogger(ChromeDriverBuilder::class.qualifiedName)
 
     fun downloadStrategy(downloadStrategy: DownloadStrategy): ChromeDriverBuilder {
         this.downloadStrategy = downloadStrategy

@@ -3,7 +3,6 @@ package kt
 import me.saro.selenium.ChromeDriverManager
 import me.saro.selenium.model.DownloadStrategy.DOWNLOAD_IF_NO_VERSION
 import me.saro.selenium.model.Platform.Companion.getPlatform
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 
