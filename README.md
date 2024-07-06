@@ -13,7 +13,7 @@ Try the example below.
 ## Gradle
 
 ```
-compile 'me.saro:selenium-chrome-all-in-one:4.22.0.1'
+compile 'me.saro:selenium-chrome-all-in-one:4.22.0.3'
 ```
 
 ## Maven
@@ -22,9 +22,19 @@ compile 'me.saro:selenium-chrome-all-in-one:4.22.0.1'
 <dependency>
   <groupId>me.saro</groupId>
   <artifactId>selenium-chrome-all-in-one</artifactId>
-  <version>4.22.0.1</version>
+  <version>4.22.0.3</version>
 </dependency>
 ```
+
+# Version info
+- CDP: Chrome DevTools Protocol (Version) == Chrome Browser Version
+
+| Selenium All-in-One / CDP | Selenium | Selenium Support CDP |
+|---------------------------|----------|----------------------|
+| 4.22.0.3 / 126            | 4.22.0   | 124 ~ 126            |
+| 4.21.0.2 / 123            | 4.21.0   | 123 ~ 125            |
+
+
 
 ## Kotlin example
 ```kotlin
@@ -94,15 +104,6 @@ list.forEach(System.out::println);
 String chromeBinPath = new File("./chrome-bin");
 SeleniumChromeAllInOne.download(chromeBinPath, Platform.getPlatform(), DownloadStrategy.DOWNLOAD_IF_NO_VERSION);
 ```
-
-# Version info
-- CDP: Chrome DevTools Protocol (Version) == Chrome Browser Version
-
-| Selenium All-in-One / CDP | Selenium | Selenium Exact CDP | Selenium Support CDP |
-|---------------------------|----------|--------------------|----------------------|
-| 4.22.0.1 / 124            | 4.22.0   | 124                | 124 ~ 126            |
-| 4.21.0.2 / 123            | 4.21.0   | 123                | 123 ~ 125            |
-
 
 # Documentation
 

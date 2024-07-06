@@ -1,14 +1,12 @@
 package me.saro.selenium
 
 
-import jdk.nashorn.internal.runtime.regexp.joni.Config.log
 import me.saro.selenium.model.DownloadStrategy
 import me.saro.selenium.model.PathManager
 import me.saro.selenium.model.SeleniumChromeException
 import me.saro.selenium.service.ChromeDriverPlus
 import me.saro.selenium.service.ChromeManager
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeDriverService
 import org.openqa.selenium.chrome.ChromeOptions
 import java.io.File
 import java.time.Duration
@@ -69,17 +67,14 @@ class ChromeDriverBuilder internal constructor(
         val pathManager = PathManager.create(manageChromePath)
         ChromeManager.load(pathManager, downloadStrategy)
         properties["webdriver.chrome.driver"] = pathManager.chromedriverBinPath
-        log.info("# set system properties")
-        properties.forEach { (k, v) -> log.info("$k: $v"); System.setProperty(k, v) }
-        log.info("# chrome: ${pathManager.chromeBinPath}")
-        options.forEach(log::info)
+        properties.forEach(System::setProperty)
         created = true
         return ChromeDriverManagerImpl(pathManager.chromeBinPath, options.toSet())
     }
 
     class ChromeDriverManagerImpl(
         private val chromeBinPath: String,
-        private val options: Set<String>
+        private val options: Set<String>,
     ): ChromeDriverManager {
         private val defaultTimeout: Duration = Duration.ofSeconds(20)
 

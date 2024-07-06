@@ -10,6 +10,8 @@ plugins {
 val appProps = Properties().apply { file("/src/main/resources/application.properties").inputStream().use { load(it) } }
 val seleniumVersion = appProps["selenium.version"]
 val allInOneVersion = "$seleniumVersion.${appProps["selenium.caio.version"]}"
+val chromeVersion = appProps["chrome.version"]
+
 
 repositories {
     mavenCentral()
@@ -23,6 +25,7 @@ java {
 dependencies {
     // selenium
     api("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
