@@ -18,10 +18,10 @@ public class ExampleTest {
                 .enableRecommendChromeOptions(true)
                 .build();
 
-        List<String> list = manager.openBackground("https://anissia.net", dp -> {
+        List<String> list = manager.openBackground("https://gs.saro.me", dp -> {
             List<String> items = new ArrayList<>();
-            dp.finds(".flex.items-center.py-3.my-1.border-b.border-gray-200.text-sm.anissia-home-reduce-10").forEach(
-                    e -> items.add(dp.find(e, "a").getText())
+            dp.finds(".post-list .node").forEach(
+                    e -> items.add(dp.find(e, "a").getText().trim() + " " + dp.find(e, "a").getAttribute("href"))
             );
             return items;
         });

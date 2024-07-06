@@ -46,9 +46,9 @@ val manager = ChromeDriverManager.builder(chromeBinPath)
     .enableRecommendChromeOptions(true)
     .build()
 
-val list = manager.openBackground("https://anissia.net") {
-    finds(".flex.items-center.py-3.my-1.border-b.border-gray-200.text-sm.anissia-home-reduce-10")
-        .map { it.find("a").text }
+val list = manager.openBackground("https://gs.saro.me") {
+    finds(".post-list .node")
+        .map { it.find("a").text.trim() + " : " + it.find("a").getAttribute("href") }
 }
 
 list.forEach(::println)
@@ -83,16 +83,16 @@ class ScrapTradeService(
 ## Java example
 ```java
 // use example
-String chromeBinPath = new File("./chrome-bin");
+File chromeBinPath = new File("./chrome-bin");
 
 ChromeDriverManager manager = ChromeDriverManager.builder(chromeBinPath)
         .enableRecommendChromeOptions(true)
         .build();
 
-List<String> list = manager.openBackground("https://anissia.net", dp -> {
+List<String> list = manager.openBackground("https://gs.saro.me", dp -> {
     List<String> items = new ArrayList<>();
-    dp.finds(".flex.items-center.py-3.my-1.border-b.border-gray-200.text-sm.anissia-home-reduce-10").forEach(
-            e -> items.add(dp.find(e, "a").getText())
+    dp.finds(".post-list .node").forEach(
+            e -> items.add(dp.find(e, "a").getText().trim() + " " + dp.find(e, "a").getAttribute("href"))
     );
     return items;
 });
@@ -101,7 +101,7 @@ list.forEach(System.out::println);
 ```
 ```java
 // just download
-String chromeBinPath = new File("./chrome-bin");
+File chromeBinPath = new File("./chrome-bin");
 SeleniumChromeAllInOne.download(chromeBinPath, Platform.getPlatform(), DownloadStrategy.DOWNLOAD_IF_NO_VERSION);
 ```
 

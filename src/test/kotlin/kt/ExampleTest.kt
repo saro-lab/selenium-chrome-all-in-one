@@ -15,9 +15,9 @@ class ExampleTest {
             .enableRecommendChromeOptions(true)
             .build()
 
-        val list = manager.openBackground("https://anissia.net") {
-            finds(".flex.items-center.py-3.my-1.border-b.border-gray-200.text-sm.anissia-home-reduce-10")
-                .map { it.find("a").text }
+        val list = manager.openBackground("https://gs.saro.me") {
+            finds(".post-list .node")
+                .map { it.find("a").text.trim() + " : " + it.find("a").getAttribute("href") }
         }
 
         list.forEach(::println)
