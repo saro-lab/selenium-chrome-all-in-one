@@ -24,7 +24,9 @@ java {
 
 dependencies {
     // selenium
-    api("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    api("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
+    api("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
