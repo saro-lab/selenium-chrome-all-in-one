@@ -13,7 +13,7 @@ Try the example below.
 ## Gradle
 
 ```
-compile 'me.saro:selenium-chrome-all-in-one:4.22.0.3'
+compile 'me.saro:selenium-chrome-all-in-one:4.24.0.0'
 ```
 
 ## Maven
