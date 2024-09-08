@@ -36,8 +36,8 @@ class ChromeDriverBuilder internal constructor(
             val key = option.substring(0, lof)
             options.removeIf { it.startsWith(key) }
         }
-        when (option) {
-            "--headless" -> throw SeleniumChromeException("The --headless option cannot be used here.\nYou can use the methods openBackground(), openWith(), or newChromeDriver() through ChromeDriverManager.")
+        if (option.startsWith("--headless")) {
+            throw SeleniumChromeException("The --headless option cannot be used here.\nYou can use the methods openBackground(), openWith(), or newChromeDriver() through ChromeDriverManager.")
         }
         options.add(option)
         return this
@@ -49,6 +49,7 @@ class ChromeDriverBuilder internal constructor(
             .option("--disable-dev-shm-usage") // Ignores the limit on temporary disk space for the browser.
             .option("--blink-settings=imagesEnabled=false") // Disables image loading.
             .option("--disable-extensions")
+            .option("--disable-search-engine-choice-screen")
             .option("--disable-popup-blocking")
             .option("--disable-gpu")
         if (disabledSecurity) {
