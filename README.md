@@ -29,10 +29,11 @@ compile 'me.saro:selenium-chrome-all-in-one:4.22.0.3'
 # Version info
 - CDP: Chrome DevTools Protocol (Version) == Chrome Browser Version
 
-| Selenium All-in-One / CDP / JDK | Selenium / CDP     |
-|---------------------------------|--------------------|
-| 4.22.0.3 / 126 / JDK 11+        | 4.22.0 / 124 ~ 126 |
-| 4.21.0.2 / 123 / JDK 11+        | 4.21.0 / 123 ~ 125 |
+| Selenium All-in-One | CDP  | JDK |
+|---------------------|------|-----|
+| 4.24.0.0            | 128  | 11+ |
+| 4.22.0.3            | 126  | 11+ |
+| 4.21.0.2            | 123  | 11+ |
 
 
 

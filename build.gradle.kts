@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
+    java
 }
 
 val appProps = Properties().apply { file("/src/main/resources/application.properties").inputStream().use { load(it) } }
@@ -20,6 +21,9 @@ repositories {
 java {
     withJavadocJar()
     withSourcesJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
 
 dependencies {
