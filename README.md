@@ -22,7 +22,7 @@ compile 'me.saro:selenium-chrome-all-in-one:4.22.0.3'
 <dependency>
   <groupId>me.saro</groupId>
   <artifactId>selenium-chrome-all-in-one</artifactId>
-  <version>4.22.0.3</version>
+  <version>4.24.0.0</version>
 </dependency>
 ```
 
