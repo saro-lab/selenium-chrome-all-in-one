@@ -11,10 +11,10 @@ import java.io.File
 
 interface ChromeDriverManager {
     fun <T> openBackground(url: String, use: ChromeDriverPlus.() -> T): T =
-        openWith(url, setOf("--headless=old"), use)
+        openWith(url, setOf("--headless=new"), use)
 
     fun <T> openBackground(url: String, addOption: Set<String>, use: ChromeDriverPlus.() -> T): T =
-        openWith(url, addOption + setOf("--headless=old"), use)
+        openWith(url, addOption + setOf("--headless=new"), use)
 
     fun <T> openWith(url: String, use: ChromeDriverPlus.() -> T): T =
         openWith(url, setOf(), use)
