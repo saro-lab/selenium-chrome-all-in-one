@@ -1,18 +1,21 @@
 import java.util.*
 
 plugins {
-    val kotlinVersion = "2.0.0"
+    val kotlinVersion = "2.1.0"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
     java
 }
 
-val appProps = Properties().apply { file("/src/main/resources/application.properties").inputStream().use { load(it) } }
+val appProps = Properties().apply { file("src/main/resources/application.properties").inputStream().use { load(it) } }
 val seleniumVersion = appProps["selenium.version"]
 val allInOneVersion = "$seleniumVersion.${appProps["selenium.caio.version"]}"
 val chromeVersion = appProps["chrome.version"]
 
+println("seleniumVersion: $seleniumVersion")
+println("allInOneVersion: $allInOneVersion")
+println("chromeVersion: $chromeVersion")
 
 repositories {
     mavenCentral()
@@ -22,7 +25,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
@@ -113,8 +116,8 @@ tasks.withType<Javadoc>().configureEach {
 }
 
 configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 tasks.withType<Test> {

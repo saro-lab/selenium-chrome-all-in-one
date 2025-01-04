@@ -13,7 +13,7 @@ Try the example below.
 ## Gradle
 
 ```
-compile 'me.saro:selenium-chrome-all-in-one:4.26.0.0'
+compile 'me.saro:selenium-chrome-all-in-one:4.27.0.0'
 ```
 
 ## Maven
@@ -22,7 +22,7 @@ compile 'me.saro:selenium-chrome-all-in-one:4.26.0.0'
 <dependency>
   <groupId>me.saro</groupId>
   <artifactId>selenium-chrome-all-in-one</artifactId>
-  <version>4.26.0.0</version>
+  <version>4.27.0.0</version>
 </dependency>
 ```
 
@@ -31,6 +31,7 @@ compile 'me.saro:selenium-chrome-all-in-one:4.26.0.0'
 
 | Selenium All-in-One | CDP | JDK |
 |---------------------|-----|-----|
+| 4.27.0.0            | 131 | 21+ |
 | 4.26.0.0            | 130 | 11+ |
 | 4.25.0.0            | 129 | 11+ |
 | 4.24.0.1            | 128 | 11+ |
