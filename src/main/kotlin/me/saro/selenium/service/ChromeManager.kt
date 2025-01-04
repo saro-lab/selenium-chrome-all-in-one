@@ -1,10 +1,7 @@
 package me.saro.selenium.service
 
 import me.saro.kit.FileKit
-import me.saro.selenium.model.ChromeVersionDetails
-import me.saro.selenium.model.DownloadStrategy
-import me.saro.selenium.model.PathManager
-import me.saro.selenium.model.SeleniumChromeException
+import me.saro.selenium.model.*
 import java.io.File
 import java.net.URI
 import java.util.logging.Logger
@@ -34,10 +31,14 @@ class ChromeManager {
             log.info("chrome binaries not found in ${pathManager.chromeRoot} and download ready")
             install(URI(chromeVersionDetails.chromeDriverUri), "#chromedriver.zip", pathManager.chromeRoot)
             install(URI(chromeVersionDetails.chromeUri), "#chrome.zip", pathManager.chromeRoot)
+
             if (pathManager.existsBinaries) {
                 log.info("installed chrome binaries in ${pathManager.chromeRoot}")
             } else {
-                throw SeleniumChromeException("download and unzip completed, but not found binaries in ${pathManager.chromeRoot}")
+                throw SeleniumChromeException("""download and unzip completed, but not found binaries in ${pathManager.chromeRoot}
+                    |chromedriverBinPath: ${pathManager.chromedriverBinPath} exists: ${File(pathManager.chromedriverBinPath).exists()}
+                    |chromeBinPath: ${pathManager.chromeBinPath} exists: ${File(pathManager.chromeBinPath).exists()}
+                """.trimMargin())
             }
         }
 
