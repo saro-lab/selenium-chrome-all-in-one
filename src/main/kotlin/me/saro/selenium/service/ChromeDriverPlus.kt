@@ -74,8 +74,8 @@ class ChromeDriverPlus(
     }
 
     internal fun terminate() {
-        try { driver.close() } catch (e: Exception) {}
         try { driver.quit() } catch (e: Exception) {}
+        try { driver.close() } catch (e: Exception) {}
         log.finer("End the Chromedriver.")
     }
 
