@@ -45,7 +45,7 @@ class ChromeDriverBuilder internal constructor(
     }
 
     fun enableRecommendChromeOptions(disabledSecurity: Boolean): ChromeDriverBuilder {
-        option("--user-data-dir=${System.getProperty("java.io.tmpdir")}/{{UUID}}") // Prevents socket errors.
+        option("--user-data-dir=${System.getProperty("java.io.tmpdir")}/saro-caio-{{UUID}}") // Prevents socket errors.
             .option("--disable-infobars") // Disables browser information bar.
             .option("--disable-dev-shm-usage") // Ignores the limit on temporary disk space for the browser.
             .option("--blink-settings=imagesEnabled=false") // Disables image loading.
