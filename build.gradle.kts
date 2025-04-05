@@ -1,7 +1,7 @@
 import java.util.*
 
 plugins {
-    val kotlinVersion = "2.1.0"
+    val kotlinVersion = "2.1.20"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
@@ -37,13 +37,13 @@ dependencies {
     api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.3")
 
     // saro kit
     implementation("me.saro:kit:0.2.0")
 
     // test
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
