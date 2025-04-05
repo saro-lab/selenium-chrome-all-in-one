@@ -49,6 +49,12 @@ class ChromeManager {
                 log.info("download $save done and unzip start...")
                 FileKit.unzip(File(root, save), 1, File(root))
                 log.info("download $save done and unzip done")
+                File(root).walk().forEach { file ->
+                    try { file.setExecutable(true, false) } catch (_: Exception) {}
+                    try { file.setReadable(true, false) } catch (_: Exception) {}
+                    try { file.setWritable(true, false) } catch (_: Exception) {}
+                }
+                log.info("set executable permission done")
                 File(root, save).delete()
             } catch (e: Exception) {
                 throw SeleniumChromeException("failed to install chrome binaries", e)
