@@ -1,11 +1,12 @@
 import java.util.*
 
 plugins {
-    val kotlinVersion = "2.1.20"
+    val kotlinVersion = "2.1.21"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
     java
+    idea
 }
 
 val appProps = Properties().apply { file("src/main/resources/application.properties").inputStream().use { load(it) } }
@@ -19,6 +20,12 @@ println("chromeVersion: $chromeVersion")
 
 repositories {
     mavenCentral()
+}
+
+idea {
+    module {
+        excludeDirs = listOf("build", "logs", "tmp").map { file(it) }.toSet()
+    }
 }
 
 java {
@@ -37,13 +44,13 @@ dependencies {
     api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.1")
 
     // saro kit
     implementation("me.saro:kit:0.2.0")
 
     // test
-    testImplementation("org.junit.jupiter:junit-jupiter:5.12.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
