@@ -13,7 +13,7 @@ class ChromeVersionDetails(
     val chromeUri: String
 
     init {
-        val milestone = jsonMapper().readTree(URI(chromeDownloadUri).toURL()).at("/milestones/$chromeVersion")
+        val milestone = URI(chromeDownloadUri).toURL().openStream().use { input -> jsonMapper().readTree(input) }.at("/milestones/$chromeVersion")
         revision = milestone.path("revision").asInt()
         chromeDriverUri = milestone.at("/downloads/chromedriver").first { it.path("platform").asText() == platform }.path("url").asText()
         chromeUri = milestone.at("/downloads/chrome").first { it.path("platform").asText() == platform }.path("url").asText()

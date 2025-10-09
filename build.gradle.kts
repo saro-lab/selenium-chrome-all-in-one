@@ -1,7 +1,9 @@
+import java.net.HttpURLConnection
+import java.net.URI
 import java.util.*
 
 plugins {
-    val kotlinVersion = "2.1.21"
+    val kotlinVersion = "2.2.20"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
@@ -9,6 +11,7 @@ plugins {
     idea
 }
 
+val appGroupId = "me.saro"
 val appProps = Properties().apply { file("src/main/resources/application.properties").inputStream().use { load(it) } }
 val seleniumVersion = appProps["selenium.version"]
 val allInOneVersion = "$seleniumVersion.${appProps["selenium.caio.version"]}"
@@ -44,13 +47,13 @@ dependencies {
     api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.1")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
 
     // saro kit
     implementation("me.saro:kit:0.2.0")
 
     // test
-    testImplementation("org.junit.jupiter:junit-jupiter:5.13.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -62,7 +65,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
 
-            groupId = "me.saro"
+            groupId = appGroupId
             artifactId = "selenium-chrome-all-in-one"
             version = allInOneVersion
 
@@ -78,9 +81,8 @@ publishing {
                             println("warn: " + e.message)
                         }
                     }
-                    val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-                    val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-                    url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+                    name = "ossrh-staging-api"
+                    url = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
                 }
             }
 
@@ -113,6 +115,25 @@ publishing {
 
 signing {
     sign(publishing.publications["maven"])
+}
+
+tasks.named("publish").configure {
+    doLast {
+        val username = project.property("sonatype.username").toString()
+        val password = project.property("sonatype.password").toString()
+        val connection = URI.create("https://ossrh-staging-api.central.sonatype.com/manual/upload/defaultRepository/$appGroupId").toURL().openConnection() as HttpURLConnection
+        connection.requestMethod = "POST"
+        connection.setRequestProperty("Authorization", "Basic " + Base64.getEncoder().encodeToString("$username:$password".toByteArray()))
+        connection.setRequestProperty("Content-Type", "application/json")
+        connection.doOutput = true
+        connection.outputStream.write("""{"publishing_type": "automatic"}""".toByteArray())
+        val responseCode = connection.responseCode
+        if (responseCode in 200..299) {
+            println("Successfully uploaded to Central Portal")
+        } else {
+            throw GradleException("Failed to upload to Central Portal: $responseCode - ${connection.inputStream?.bufferedReader()?.readText()}")
+        }
+    }
 }
 
 tasks.withType<Javadoc>().configureEach {
