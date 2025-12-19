@@ -1,9 +1,11 @@
+// ./gradlew wrapper --gradle-version latest
+
 import java.net.HttpURLConnection
 import java.net.URI
 import java.util.*
 
 plugins {
-    val kotlinVersion = "2.2.20"
+    val kotlinVersion = "2.3.0"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
     signing
     `maven-publish`
@@ -31,14 +33,6 @@ idea {
     }
 }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
 dependencies {
     // selenium
     implementation("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
@@ -47,13 +41,13 @@ dependencies {
     api("org.seleniumhq.selenium:selenium-devtools-v$chromeVersion:$seleniumVersion")
 
     // jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
+    implementation("tools.jackson.module:jackson-module-kotlin:3.0.3")
 
     // saro kit
     implementation("me.saro:kit:0.2.0")
 
     // test
-    testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -143,9 +137,17 @@ tasks.withType<Javadoc>().configureEach {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
 configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 tasks.withType<Test> {

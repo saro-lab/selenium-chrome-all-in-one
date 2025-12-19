@@ -1,8 +1,8 @@
 package me.saro.selenium.model
 
-import com.fasterxml.jackson.module.kotlin.jsonMapper
 import me.saro.selenium.model.AppProps.Companion.chromeDownloadUri
 import me.saro.selenium.model.AppProps.Companion.chromeVersion
+import tools.jackson.module.kotlin.jsonMapper
 import java.net.URI
 
 class ChromeVersionDetails(
